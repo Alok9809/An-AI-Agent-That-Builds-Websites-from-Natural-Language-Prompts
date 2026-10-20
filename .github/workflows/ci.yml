@@ -1,4 +1,4 @@
-name: ThreatGraph CI
+name: AI Website Builder Agent CI
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
         run: npm run build
 
   backend:
-    name: Backend Tests
+    name: Backend Lint and Syntax Check
     runs-on: ubuntu-latest
 
     defaults:
@@ -62,10 +62,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest httpx
 
       - name: Check Python syntax
         run: python -m compileall -q app
 
-      - name: Run backend tests
-        run: python -m pytest -v

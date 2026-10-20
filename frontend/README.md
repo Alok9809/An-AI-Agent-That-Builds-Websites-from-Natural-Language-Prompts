@@ -1,16 +1,29 @@
-# React + Vite
+# AI Website Builder Agent - Frontend 💻✨
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the interactive React frontend for **An AI Agent That Builds Websites from Natural Language Prompts**.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Natural Language Prompt Studio:** Interactive prompt input with pre-configured templates and custom prompt generation.
+- **Visual Controls:** Theme selection (Modern Dark, Clean Light, Cyber Neon) and aesthetic style controls.
+- **Instant Dual Workspace:**
+  - **Live Preview:** Sandboxed responsive iframe renderer with Desktop, Tablet, and Mobile viewport switchers.
+  - **Blueprint & Token Inspector:** Visual breakdown of layout sections and color tokens.
+  - **Code Inspector:** Full semantic HTML and CSS view with one-click copy and download.
+- **Challenge-Solution Breakdown:** Real-time demonstration of how prompt-driven synthesis solves manual coding bottlenecks, design skill gaps, and rigid builder templates.
 
-## React Compiler
+## 🛠️ Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Install dependencies
+npm install
 
-## Expanding the ESLint configuration
+# Start development server
+npm run dev
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Run linter
+npm run lint
+
+# Production build
+npm run build
+```

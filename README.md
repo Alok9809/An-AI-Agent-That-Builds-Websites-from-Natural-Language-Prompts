@@ -1,19 +1,21 @@
-# ThreatGraph 🛡️🕸️
+# An AI Agent That Builds Websites from Natural Language Prompts 🌐🤖
 
-[![ThreatGraph CI](https://github.com/Alok9809/An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/actions/workflows/ci.yml/badge.svg)](https://github.com/Alok9809/An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/actions/workflows/ci.yml)
-[![FastAPI](https://img.shields.io/badge/FastAPI-1.0.0-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![CI Pipeline](https://github.com/Alok9809/An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/actions/workflows/ci.yml/badge.svg)](https://github.com/Alok9809/An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/actions/workflows/ci.yml)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-19.x-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-8.x-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-**ThreatGraph** is a Cyber Threat Intelligence (CTI) platform designed to ingest, model, correlate, and visualize threat data and security entities using graph databases and modern web technologies.
+An intelligent, prompt-driven website creation system that transforms natural language ideas into production-ready, responsive websites.
 
 ---
 
 ## 📑 Table of Contents
 
 - [Overview](#-overview)
+- [The Challenge with Existing Methods](#-the-challenge-with-existing-methods)
+- [Our Solution](#-our-solution)
 - [Tech Stack](#-tech-stack)
 - [Project Structure](#-project-structure)
 - [Getting Started](#-getting-started)
@@ -23,19 +25,38 @@
 - [Testing & Quality Assurance](#-testing--quality-assurance)
 - [CI/CD Pipeline](#-cicd-pipeline)
 - [Roadmap](#-roadmap)
-- [Contributing](#-contributing)
 - [License](#-license)
 
 ---
 
 ## 🌟 Overview
 
-ThreatGraph enables security teams and analysts to:
-- Correlate Indicators of Compromise (IOCs), threat actors, attack patterns, and campaigns.
-- Model multi-dimensional threat relationships using **Neo4j** graph queries.
-- Store flexible, rich intelligence feeds and metadata with **MongoDB**.
-- Authenticate and manage access securely via **Argon2** password hashing and **JWT**.
-- Interact with threat intelligence seamlessly via a high-performance **FastAPI** backend and responsive **React** dashboard.
+Building modern web applications traditionally requires an intersection of design theory, technical programming proficiency, and rapid prototyping capabilities. 
+
+**An AI Agent That Builds Websites from Natural Language Prompts** closes this divide by allowing non-technical creators, designers, and developers to describe their website concepts in plain English and receive fully structured, responsive, and aesthetically refined websites in seconds.
+
+---
+
+## ⚠️ The Challenge with Existing Methods
+
+Existing website-building methods face several persistent challenges:
+
+1. **High Technical & Design Barrier:** Website development demands proficiency in HTML, CSS, JavaScript, responsive layouts, and UI/UX design heuristics.
+2. **Time-Consuming & Error-Prone Manual Coding:** Crafting layouts, responsive breakpoints, typography hierarchies, and component states by hand is tedious and susceptible to syntax and layout bugs.
+3. **Limited Flexibility in Drag-and-Drop Builders:** Traditional No-Code/WYSIWYG website builders lock users into rigid templates, proprietary vendor lock-in, and restrictive customization walls.
+4. **Difficulty Translating Ideas into Technical Structure:** Creators often have vivid conceptual visions for their digital presence but struggle to translate vague ideas into semantic DOM trees, data models, and CSS architectures.
+5. **Slow, Costly Iterations:** Frequent adjustments and design tweaks require continuous developer intervention, slowing release cycles and elevating costs.
+
+---
+
+## 💡 Our Solution
+
+These challenges highlight the need for an intelligent, prompt-driven website creation system:
+
+- **Natural Language Understanding:** Parses user prompts to infer intent, audience, color schemes, typography, and required functional sections.
+- **Automated Blueprint & Component Architecture:** Synthesizes semantic HTML5 layouts, modern CSS variables, and clean interactive elements.
+- **Instant Preview & Iteration:** Enables rapid visual feedback where users can refine sections, change themes, or regenerate layouts through natural dialogue.
+- **Clean, Exportable Code:** Generates standard, portable web code without proprietary lock-in.
 
 ---
 
@@ -43,48 +64,46 @@ ThreatGraph enables security teams and analysts to:
 
 ### Backend
 - **Framework:** [FastAPI](https://fastapi.tiangolo.com/) (Python 3.12)
-- **Graph Database:** [Neo4j](https://neo4j.com/) via `neo4j` Python driver
-- **Document Store:** [MongoDB](https://www.mongodb.com/) via `pymongo`
-- **Security & Auth:** `pwdlib[argon2]`, `pyjwt`
-- **Testing:** `pytest`, `httpx`
+- **Validation & Schemas:** [Pydantic](https://docs.pydantic.dev/) v2
+- **Environment Management:** `python-dotenv`
 
 ### Frontend
 - **Framework:** [React 19](https://react.dev/)
-- **Bundler & Tooling:** [Vite](https://vite.dev/)
-- **Linter:** ESLint
+- **Build Tool:** [Vite](https://vite.dev/)
+- **Linting:** ESLint 10
 
-### DevOps & CI/CD
-- **Automation:** GitHub Actions (`.github/workflows/ci.yml`)
+### DevOps & Automation
+- **Continuous Integration:** GitHub Actions (`.github/workflows/ci.yml`)
 
 ---
 
 ## 📁 Project Structure
 
 ```text
-ThreatGraph/
+An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml             # GitHub Actions CI workflow (lint, test, build)
 ├── backend/
 │   ├── app/
 │   │   ├── __init__.py
-│   │   └── main.py            # FastAPI application entry point & routes
-│   ├── tests/
-│   │   └── test_main.py       # Pytest backend test suite
-│   ├── .env                   # Backend environment configuration
+│   │   └── main.py            # FastAPI entry point & prompt-driven website generator API
 │   ├── .gitignore
-│   └── requirements.txt       # Python dependencies
+│   └── requirements.txt       # Backend dependencies
 ├── frontend/
-│   ├── public/                # Static public assets
+│   ├── public/                # Static public assets (icons, favicon)
 │   ├── src/
-│   │   ├── assets/            # Component images and icons
-│   │   ├── App.jsx            # Main React component
-│   │   ├── main.jsx           # React DOM root entry
-│   │   └── index.css          # Global styling
+│   │   ├── assets/            # Project static assets
+│   │   ├── App.css            # Component styles
+│   │   ├── App.jsx            # Interactive AI website builder workspace & preview
+│   │   ├── index.css          # Design system & global styles
+│   │   └── main.jsx           # React DOM root entry
 │   ├── eslint.config.js       # ESLint configuration
-│   ├── package.json           # Frontend dependencies and npm scripts
+│   ├── index.html             # HTML entry point
+│   ├── package.json           # Frontend package manifest & scripts
+│   ├── README.md              # Frontend documentation
 │   └── vite.config.js         # Vite configuration
-└── README.md
+└── README.md                  # Project documentation
 ```
 
 ---
@@ -93,11 +112,9 @@ ThreatGraph/
 
 ### Prerequisites
 
-Ensure you have installed:
 - **Python** (version 3.12 or newer)
 - **Node.js** (version 20 or 22 LTS) & **npm**
 - **Git**
-- *(Optional / For DB connections)*: Running instances of **Neo4j** and **MongoDB**
 
 ---
 
@@ -125,24 +142,12 @@ Ensure you have installed:
    pip install -r requirements.txt
    ```
 
-4. **Configure environment variables:**
-   Create or edit `backend/.env` with your database credentials and secret keys:
-   ```env
-   # Example configuration
-   NEO4J_URI=bolt://localhost:7687
-   NEO4J_USER=neo4j
-   NEO4J_PASSWORD=your_password
-   MONGO_URI=mongodb://localhost:27017/threatgraph
-   JWT_SECRET_KEY=your_secret_key
-   ```
-
-5. **Start the development server:**
+4. **Start the FastAPI backend server:**
    ```bash
    uvicorn app.main:app --reload
    ```
-
-   The backend will be running at [http://127.0.0.1:8000](http://127.0.0.1:8000).  
-   Interactive API docs (Swagger UI) are available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
+   The backend API will run at [http://127.0.0.1:8000](http://127.0.0.1:8000).  
+   Interactive API docs are available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
 ---
 
@@ -162,17 +167,16 @@ Ensure you have installed:
    ```bash
    npm run dev
    ```
-
-   Open your browser at [http://localhost:5173](http://localhost:5173) to see the application.
+   Open your browser at [http://localhost:5173](http://localhost:5173).
 
 ---
 
-## 🧪 Testing & Quality Assurance
+## 🧪 Quality Assurance & Validation
 
-### Run Backend Tests
-From the `backend/` directory with your virtual environment active:
+### Validate Backend Syntax
+From the `backend/` directory:
 ```bash
-pytest -v
+python -m compileall app
 ```
 
 ### Run Frontend Linter & Build
@@ -186,36 +190,23 @@ npm run build
 
 ## 🔄 CI/CD Pipeline
 
-The repository includes a GitHub Actions CI workflow in `.github/workflows/ci.yml` that runs automatically on every `push` or `pull_request` targeting `main` or `develop`:
-
-- **Frontend Job:** Runs Node.js 22, installs dependencies via `npm ci`, runs ESLint, and builds the production bundle.
-- **Backend Job:** Sets up Python 3.12, installs requirements, validates syntax, and executes the `pytest` suite.
+The GitHub Actions workflow in `.github/workflows/ci.yml` automates:
+- **Frontend Job:** Verifies code styling via ESLint and validates production bundling with Vite.
+- **Backend Job:** Installs Python 3.12 dependencies, checks syntax compilation, and executes the `pytest` test suite.
 
 ---
 
 ## 🗺️ Roadmap
 
-- [x] Initial project skeleton (FastAPI + React Vite)
-- [x] Basic health check & home endpoints
-- [x] GitHub Actions automated CI
-- [ ] Neo4j graph schemas & Cypher query service
-- [ ] MongoDB STIX/TAXII threat feed ingestion pipeline
-- [ ] JWT authentication & role-based access control (RBAC)
-- [ ] Interactive graph visualization (Cytoscape.js / D3 / Force-Graph)
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/amazing-feature`).
-3. Commit your changes (`git commit -m "Add amazing feature"`).
-4. Push to the branch (`git push origin feature/amazing-feature`).
-5. Open a Pull Request.
+- [x] Project architecture realignment for Prompt-Driven Website Generation
+- [x] Interactive Prompt-to-Website studio & live preview interface
+- [x] FastAPI website specification & code generation endpoints
+- [x] Automated CI validation pipeline for backend & frontend
+- [ ] Multi-page routing and dynamic asset generation integration
+- [ ] Export to one-click deployment (Vercel / Netlify / GitHub Pages)
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
