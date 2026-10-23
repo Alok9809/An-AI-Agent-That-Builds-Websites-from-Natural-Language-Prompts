@@ -315,7 +315,7 @@ class AuthService:
             input_otp_hash = hash_token(otp.strip())
             if not expected_otp_hash or not constant_time_compare(input_otp_hash, expected_otp_hash):
                 await db_manager.email_verifications.update_one(
-                    {"_id": record["_id"]},
+                    self._id_query(record["_id"]),
                     {"$inc": {"attempts": 1}},
                 )
                 raise HTTPException(
@@ -344,7 +344,7 @@ class AuthService:
 
         # Mark token/OTP as consumed
         await db_manager.email_verifications.update_one(
-            {"_id": record["_id"]},
+            self._id_query(record["_id"]),
             {"$set": {"is_used": True, "used_at": now}},
         )
 
