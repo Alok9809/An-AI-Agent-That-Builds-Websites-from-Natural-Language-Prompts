@@ -12,6 +12,8 @@
 *.cert
 *.pfx
 secrets.*
+*credentials*.txt
+env_credentials.txt
 
 # Python & Virtual Environments
 __pycache__/
