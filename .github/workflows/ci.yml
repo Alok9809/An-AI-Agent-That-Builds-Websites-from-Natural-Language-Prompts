@@ -46,9 +46,23 @@ jobs:
     name: Backend Tests and Quality Checks
     runs-on: ubuntu-latest
 
+    services:
+      mongodb:
+        image: mongo:7.0
+        ports:
+          - 27017:27017
+
     defaults:
       run:
         working-directory: backend
+
+    env:
+      ENV: test
+      MONGODB_URI: mongodb://localhost:27017
+      MONGODB_DATABASE: test_forma
+      SESSION_SECRET: forma_ci_test_super_secure_session_secret_32_chars_long
+      EMAIL_PROVIDER: console
+      REQUIRE_EMAIL_VERIFICATION: true
 
     steps:
       - name: Checkout code
