@@ -1,29 +1,34 @@
-# AI Website Builder Agent - Frontend 💻✨
+# FORMA — Frontend 💻✨
 
-This is the interactive React frontend for **An AI Agent That Builds Websites from Natural Language Prompts**.
+> **Give thought its form.**  
+> *Production-Minded Authentication Module*
 
-## 🚀 Features
+The interactive frontend for **FORMA**, built with React 19, TypeScript, Tailwind CSS v4, and React Router v7.
 
-- **Natural Language Prompt Studio:** Interactive prompt input with pre-configured templates and custom prompt generation.
-- **Visual Controls:** Theme selection (Modern Dark, Clean Light, Cyber Neon) and aesthetic style controls.
-- **Instant Dual Workspace:**
-  - **Live Preview:** Sandboxed responsive iframe renderer with Desktop, Tablet, and Mobile viewport switchers.
-  - **Blueprint & Token Inspector:** Visual breakdown of layout sections and color tokens.
-  - **Code Inspector:** Full semantic HTML and CSS view with one-click copy and download.
-- **Challenge-Solution Breakdown:** Real-time demonstration of how prompt-driven synthesis solves manual coding bottlenecks, design skill gaps, and rigid builder templates.
+## 🚀 Implemented Routes & Features
 
-## 🛠️ Development
+- **`/login`:** Split-screen layout with visual branding mockup, email/password inputs with visibility toggle, remember-me checkbox, and inline Zod validation.
+- **`/register`:** Full name, email, password strength meter, password confirm matching, and mandatory Terms of Service & Privacy Policy agreement.
+- **`/forgot-password`:** Anti-enumeration password reset link dispatcher.
+- **`/reset-password`:** Cryptographic single-use token validator and password updater.
+- **`/verify-email`:** Token confirmation and link resend form.
+- **`/dashboard`:** Protected placeholder view displaying session and account status, with sign-out action.
+
+## 🛠️ Commands
 
 ```bash
 # Install dependencies
-npm install
+npm install --legacy-peer-deps
 
-# Start development server
+# Run local development server
 npm run dev
 
-# Run linter
+# Run ESLint linter
 npm run lint
 
-# Production build
+# Run Vitest test suite
+npm test
+
+# Build production bundle
 npm run build
 ```
