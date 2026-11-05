@@ -563,6 +563,15 @@ export const DashboardPage = () => {
   const [attachedFile, setAttachedFile] = useState(null)
   const [isBuilding, setIsBuilding] = useState(false)
   const fileInputRef = useRef(null)
+  const textareaRef = useRef(null)
+
+  // Automatically grow textarea downwards as text wraps, zero scrollbars
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto'
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
+    }
+  }, [promptInput])
 
   // Modals state
   const [renamingProject, setRenamingProject] = useState(null)
@@ -1014,13 +1023,10 @@ export const DashboardPage = () => {
                   {/* Top Area: Clean Multiline-Capable Input with Refined Typography */}
                   <div className="relative w-full flex items-start justify-between gap-2">
                     <textarea
+                      ref={textareaRef}
                       rows={1}
                       value={promptInput}
-                      onChange={(e) => {
-                        setPromptInput(e.target.value)
-                        e.target.style.height = 'auto'
-                        e.target.style.height = `${Math.min(e.target.scrollHeight, 140)}px`
-                      }}
+                      onChange={(e) => setPromptInput(e.target.value)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' && !e.shiftKey) {
                           e.preventDefault()
@@ -1028,7 +1034,7 @@ export const DashboardPage = () => {
                         }
                       }}
                       placeholder="Describe the website you want to build and let Forma do the rest..."
-                      className="w-full bg-transparent text-sm sm:text-base text-[#F5F5F7] font-['Plus_Jakarta_Sans',sans-serif] placeholder:font-['Plus_Jakarta_Sans',sans-serif] placeholder:font-normal placeholder:text-[#6C7A96] outline-none resize-none leading-relaxed selection:bg-[#3867FF]/35 min-h-[26px] sm:min-h-[28px] max-h-36 overflow-y-auto"
+                      className="w-full bg-transparent text-sm sm:text-base text-[#F5F5F7] font-['Plus_Jakarta_Sans',sans-serif] placeholder:font-['Plus_Jakarta_Sans',sans-serif] placeholder:font-normal placeholder:text-[#6C7A96] outline-none resize-none leading-relaxed selection:bg-[#3867FF]/35 min-h-[26px] sm:min-h-[28px] overflow-hidden"
                     />
                     {promptInput && (
                       <button
