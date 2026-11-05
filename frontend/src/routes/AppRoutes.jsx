@@ -8,7 +8,8 @@ import { RegisterPage } from '../pages/RegisterPage'
 import { ForgotPasswordPage } from '../pages/ForgotPasswordPage'
 import { ResetPasswordPage } from '../pages/ResetPasswordPage'
 import { VerifyEmailPage } from '../pages/VerifyEmailPage'
-import { DashboardPlaceholderPage } from '../pages/DashboardPlaceholderPage'
+import { DashboardPage } from '../pages/DashboardPage'
+import { BuilderPage } from '../pages/BuilderPage'
 
 /**
  * AppRoutes defines the route hierarchy and access control guards.
@@ -53,7 +54,15 @@ export const AppRoutes = () => {
         path="/dashboard"
         element={
           <ProtectedRoute>
-            <DashboardPlaceholderPage />
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/builder"
+        element={
+          <ProtectedRoute>
+            <BuilderPage />
           </ProtectedRoute>
         }
       />
