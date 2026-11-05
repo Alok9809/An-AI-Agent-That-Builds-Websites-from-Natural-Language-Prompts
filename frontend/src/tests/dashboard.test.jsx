@@ -57,17 +57,17 @@ describe('DashboardPage Component', () => {
   it('renders Hero Section with "Create New Website" heading and prompt input bar', () => {
     renderDashboard()
     expect(screen.getByText('Create New Website')).toBeDefined()
-    const promptInput = screen.getByPlaceholderText(/A minimalist dark portfolio for an AI engineer/i)
+    const promptInput = screen.getByPlaceholderText(/Describe the website you want to build/i)
     expect(promptInput).toBeDefined()
-    expect(screen.getByText('Build Website')).toBeDefined()
+    expect(screen.getByRole('button', { name: /^Build$/i })).toBeDefined()
   })
 
   it('submits hero prompt and navigates to /builder?prompt=...', () => {
     renderDashboard()
-    const promptInput = screen.getByPlaceholderText(/A minimalist dark portfolio for an AI engineer/i)
+    const promptInput = screen.getByPlaceholderText(/Describe the website you want to build/i)
     fireEvent.change(promptInput, { target: { value: 'Sleek luxury ecommerce store' } })
     
-    const submitBtn = screen.getByText('Build Website')
+    const submitBtn = screen.getByRole('button', { name: /^Build$/i })
     fireEvent.click(submitBtn)
 
     expect(mockNavigate).toHaveBeenCalledWith('/builder?prompt=Sleek%20luxury%20ecommerce%20store')
@@ -78,7 +78,7 @@ describe('DashboardPage Component', () => {
     const suggestionBtn = screen.getByText(/AI SaaS Landing Page with pricing calculator/i)
     fireEvent.click(suggestionBtn)
 
-    const promptInput = screen.getByPlaceholderText(/A minimalist dark portfolio for an AI engineer/i)
+    const promptInput = screen.getByPlaceholderText(/Describe the website you want to build/i)
     expect(promptInput.value).toBe('AI SaaS Landing Page with pricing calculator and testimonials')
   })
 

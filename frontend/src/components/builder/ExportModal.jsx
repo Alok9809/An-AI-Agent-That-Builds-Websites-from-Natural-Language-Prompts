@@ -44,7 +44,8 @@ export const ExportModal = ({
     setDownloadSuccess(false)
 
     try {
-      const zip = new JSZip()
+      const ZipClass = JSZip?.default || JSZip
+      const zip = new ZipClass()
 
       const finalHtml =
         html && html.trim()

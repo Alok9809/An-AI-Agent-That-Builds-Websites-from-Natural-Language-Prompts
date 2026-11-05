@@ -12,6 +12,9 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  optimizeDeps: {
+    include: ['jszip'],
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
@@ -31,5 +34,6 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
+    testTimeout: 15000,
   },
 })

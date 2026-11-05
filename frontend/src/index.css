@@ -26,8 +26,8 @@
 
 body {
   min-height: 100vh;
-  background-color: #08080A;
-  color: #111827;
+  background-color: #080B14;
+  color: #F5F5F7;
   font-family: var(--font-sans);
   overflow-x: hidden;
 }
@@ -126,6 +126,72 @@ h1, h2, h3, h4, h5, h6 {
   animation: float-subtle 4s ease-in-out infinite;
 }
 
+@keyframes border-beam-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-border-beam {
+  animation: border-beam-spin 4.5s linear infinite;
+  will-change: transform;
+}
+
+@keyframes laser-glow-pulse {
+  0%, 100% {
+    opacity: 0.65;
+    filter: blur(14px);
+  }
+  50% {
+    opacity: 0.95;
+    filter: blur(18px);
+  }
+}
+
+.animate-laser-pulse {
+  animation: laser-glow-pulse 3s ease-in-out infinite;
+}
+
+/* Buttery-Smooth Dissolve & Drift Word Transition (No Clipping / No Squeeze) */
+@keyframes word-fade-up-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-14px);
+    filter: blur(4px);
+  }
+}
+
+@keyframes word-fade-up-in {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+.animate-word-fade-up-out {
+  animation: word-fade-up-out 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity, filter;
+}
+
+.animate-word-fade-up-in {
+  animation: word-fade-up-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity, filter;
+}
+
 @keyframes fadeInSlideUp {
   from {
     opacity: 0;
@@ -193,6 +259,36 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-btn-shine {
   animation: shine-sweep 3s ease-in-out infinite;
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 1.2s ease infinite;
+}
+
+@keyframes laser-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-laser-sweep {
+  animation: laser-sweep 0.75s ease-in-out infinite;
 }
 
 /* Subtle scrollbars */
