@@ -2,7 +2,8 @@ import React from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { FormaLogo } from '../components/ui/FormaLogo'
 import { Button } from '../components/ui/Button'
-import { ArrowLeft, Sparkles, Monitor, Smartphone, Tablet, Code2, Play } from 'lucide-react'
+import { PreviewCanvas } from '../components/builder/PreviewCanvas'
+import { ArrowLeft, Sparkles, Play } from 'lucide-react'
 
 export const BuilderPage = () => {
   const [searchParams] = useSearchParams()
@@ -13,7 +14,7 @@ export const BuilderPage = () => {
   return (
     <div className="min-h-screen w-full bg-[#09090b] text-[#fbf9f5] flex flex-col font-sans">
       {/* Builder Top Bar */}
-      <header className="w-full border-b border-[rgba(244,240,232,0.08)] bg-[#0c0c10]/90 backdrop-blur-md px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+      <header className="w-full border-b border-[rgba(244,240,232,0.08)] bg-[#0c0c10]/90 backdrop-blur-md px-4 sm:px-6 py-3 flex items-center justify-between gap-4 sticky top-0 z-40">
         <div className="flex items-center gap-3">
           <Button
             variant="outline"
@@ -28,24 +29,11 @@ export const BuilderPage = () => {
           <FormaLogo size="sm" showBadge={true} variant="dark" />
         </div>
 
-        {/* Viewport Toggles */}
-        <div className="hidden md:flex items-center gap-1 p-1 rounded-xl bg-[#14141a] border border-[rgba(244,240,232,0.06)]">
-          <button className="p-1.5 rounded-lg bg-[#ff6326]/20 text-[#ff6326]">
-            <Monitor className="w-4 h-4" />
-          </button>
-          <button className="p-1.5 rounded-lg text-[#9c978e] hover:text-white">
-            <Tablet className="w-4 h-4" />
-          </button>
-          <button className="p-1.5 rounded-lg text-[#9c978e] hover:text-white">
-            <Smartphone className="w-4 h-4" />
-          </button>
-        </div>
-
         {/* Action Buttons */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#14141a] border border-[rgba(244,240,232,0.06)] text-[11px] font-mono text-[#9c978e]">
+          <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#14141a] border border-[rgba(244,240,232,0.06)] text-[11px] font-mono text-[#9c978e]">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>CANVAS READY</span>
+            <span>LIVE PREVIEW ACTIVE</span>
           </div>
           <Button
             variant="primary"
@@ -80,31 +68,9 @@ export const BuilderPage = () => {
           </span>
         </div>
 
-        {/* Canvas Visual Mock Area */}
-        <div className="flex-1 min-h-[460px] rounded-2xl bg-[#0b0b0e] border border-[rgba(244,240,232,0.1)] p-8 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-2xl">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,99,38,0.05)_0%,transparent_70%)] pointer-events-none" />
-
-          <div className="relative z-10 max-w-md flex flex-col items-center gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-[#14141a] border border-[#ff6326]/30 flex items-center justify-center text-[#ff6326] shadow-xl animate-float">
-              <Code2 className="w-8 h-8" />
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <h2 className="text-xl font-bold font-display text-white">Visual Canvas Engine</h2>
-              <p className="text-xs text-[#9c978e] leading-relaxed">
-                The visual code generation stream is ready. Real-time DOM editing, component inspection, and LLM synthesis are enabled.
-              </p>
-            </div>
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => navigate('/dashboard')}
-              className="mt-2 text-xs border-[rgba(244,240,232,0.15)] text-[#fbf9f5] cursor-pointer"
-            >
-              Return to Project Dashboard
-            </Button>
-          </div>
+        {/* Live Canvas Preview Component */}
+        <div className="flex-1 w-full">
+          <PreviewCanvas prompt={prompt} />
         </div>
       </main>
     </div>
