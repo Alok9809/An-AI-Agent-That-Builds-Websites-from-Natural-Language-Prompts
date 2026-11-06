@@ -373,7 +373,7 @@ python -m pytest -v
 - **Email Links in Development:** When `EMAIL_PROVIDER=console`, password reset links and verification tokens are logged directly to the FastAPI terminal console.
 - **Cross-Origin Cookies:** The Vite development server automatically proxies `/api` requests to `http://127.0.0.1:8000`, eliminating third-party cookie restrictions during local development.
 - **Rate Limit Triggered:** If too many failed authentication attempts occur within 60 seconds, the API responds with `429 Too Many Requests`. Wait 60 seconds or restart the backend to reset the window.
-- **GitHub Actions Language Server Warnings:** All GitHub Action references in `.github/workflows/ci.yml` are pinned to immutable commit hashes (`actions/checkout@11bd71...`, `actions/setup-node@1d0ff4...`, `actions/setup-python@423755...`) to prevent rate-limit lookups and tag resolution errors.
+- **GitHub Actions Language Server Warnings:** In VS Code/Antigravity IDE, the built-in language server queries the GitHub API to resolve external actions like `actions/checkout@v4`. If unauthenticated or offline, it can show false-positive squiggly warnings (`Unable to resolve action`). This is resolved by associating `.github/workflows/*.yml` files as standard `yaml` in `.vscode/settings.json`.
 
 ---
 
