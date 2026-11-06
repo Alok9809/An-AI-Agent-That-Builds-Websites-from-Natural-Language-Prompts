@@ -6,47 +6,88 @@
 [![CI Pipeline](https://github.com/Alok9809/An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/actions/workflows/ci.yml/badge.svg)](https://github.com/Alok9809/An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/actions/workflows/ci.yml)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![React](https://img.shields.io/badge/React-19.x%20(React.js)-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![JavaScript](https://img.shields.io/badge/JavaScript-ES2022-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Vite](https://img.shields.io/badge/Vite-6.x-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-4.x-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-Atlas%20%2F%20Motor-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
-[![Argon2id](https://img.shields.io/badge/Security-Argon2id-critical.svg)](https://en.wikipedia.org/wiki/Argon2)
+[![Vitest](https://img.shields.io/badge/Vitest-57%20Passed-FCC72B?logo=vitest&logoColor=black)](https://vitest.dev/)
+[![Pytest](https://img.shields.io/badge/Pytest-12%20Passed-0A9EDC?logo=pytest&logoColor=white)](https://docs.pytest.org/)
+[![Security](https://img.shields.io/badge/Security-Argon2id%20%7C%20CSRF%20Protected-critical.svg)](https://en.wikipedia.org/wiki/Argon2)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-**FORMA** is an intelligent, prompt-driven website creation system that transforms natural language ideas into production-ready, responsive websites.
-
-This document details the **Production-Minded Authentication Module** implemented for FORMA.
+**FORMA** is an intelligent, prompt-driven website synthesis platform that turns natural language thoughts and ideas into responsive, production-ready web experiences in real time. It pairs a **dynamic AI Website Studio & Builder Canvas** with an **enterprise-grade, production-minded Authentication and Security core**.
 
 ---
 
 ## 📑 Table of Contents
 
-- [Overview & Architecture](#-overview--architecture)
+- [Key Features](#-key-features)
+- [System Architecture & Workflow](#-system-architecture--workflow)
 - [Visual Direction & Brand Identity](#-visual-direction--brand-identity)
 - [Tech Stack](#-tech-stack)
-- [Security & Authentication Design](#-security--authentication-design)
 - [Project Structure](#-project-structure)
+- [Security & Authentication Engine](#-security--authentication-engine)
 - [Getting Started](#-getting-started)
   - [Prerequisites](#prerequisites)
   - [1. Backend Setup](#1-backend-setup)
   - [2. Frontend Setup](#2-frontend-setup)
-- [API Endpoints](#-api-endpoints)
+- [API Reference](#-api-reference)
 - [Testing & Quality Assurance](#-testing--quality-assurance)
 - [Environment Configuration](#-environment-configuration)
 - [Troubleshooting](#-troubleshooting)
-- [Scope & Future Roadmap](#-scope--future-roadmap)
+- [Roadmap & Milestone Status](#-roadmap--milestone-status)
 - [License](#-license)
 
 ---
 
-## 🌟 Overview & Architecture
+## 🌟 Key Features
 
-The **FORMA Authentication Module** provides a secure, ergonomic foundation for user accounts:
-- **Server-Managed Sessions:** Uses cryptographically secure random session tokens stored as SHA-256 hashes in MongoDB, delivered to the client via `HttpOnly`, `SameSite=Lax`, and `Secure` (in HTTPS) cookies.
-- **Double Submit CSRF Defense:** Issues a readable `forma_csrf` cookie matched against an `x-csrf-token` header on state-changing requests.
-- **Argon2id Password Hashing:** Employs RFC 9106 recommended Argon2id parameters (64MB memory, 2 iterations, 1 parallelism thread).
-- **Anti-Enumeration Safeguards:** Generic responses on authentication failures and password reset queries prevent user discovery.
-- **Single-Use Expiring Tokens:** Reset and verification tokens are stored as hashes with TTL indexes and verified in service logic.
-- **Sliding-Window Rate Limiting:** In-memory throttling prevents brute-force credential stuffing and password-reset abuse.
+### 1. 🤖 Prompt-Driven AI Website Builder Studio
+- **Dynamic Synthesis Engine:** Translates free-form prompts into full website layouts (Hero, Features, Showcase, Pricing, Testimonials, Interactive CTAs, and Navigation).
+- **Live Sandboxed Preview Canvas:** Real-time multi-device iframe rendering with instant viewport switching:
+  - 🖥️ **Desktop:** 1440px wide-screen view
+  - 📱 **Tablet:** 768px portrait/responsive view
+  - 📲 **Mobile:** 375px mobile-first layout
+- **Multi-Stage Assembly Visualizer:** Step-by-step progress HUD tracking Tokenization, Layout Architecture, Responsive Styling, and Component Wiring.
+- **In-Studio Prompt Refinement:** Edit, regenerate, or evolve websites live using the in-canvas floating Prompt Bar.
+- **Source Code Inspector:** Live tabbed viewer for raw HTML and CSS syntax with one-click clipboard copying.
+- **One-Click Export:** Download synthesized websites as standalone HTML or compressed ZIP packages ready for static hosting.
+
+### 2. ⚡ Cinematic Dashboard Experience
+- **Auto-Expanding Prompt Composer:** Downward auto-growing input field with zero awkward scrollbars on multi-line typing or wrapping.
+- **Dynamic Rotating Headlines:** Fluid typographic rotation (*"What should we build / design / launch / code today?"*).
+- **Holographic Build Trigger:** Cinematic gradient pulsing HUD animation with soundless visual feedback on `Enter` or `Build` click.
+- **Direct Asset Uploader:** Circular attachment trigger `(+)` for reference images, wireframes, and brand guidelines.
+- **Curated Templates & Mockups:** Pre-configured architectures including *NOVA SaaS*, *SwiftMart Quickcommerce*, *Veloce Mobility*, and *Solstice Generative Audio*.
+
+### 3. 🛡️ Production-Grade Security & Authentication
+- **HttpOnly Session Cookies:** Cryptographically random session tokens stored as SHA-256 hashes in MongoDB.
+- **Double Submit CSRF Defense:** Paired `forma_csrf` cookie matched with `x-csrf-token` header verification on state-changing requests.
+- **Argon2id Password Hashing:** RFC 9106 parameters (64MB memory, 2 iterations, 1 parallelism thread).
+- **Anti-Enumeration Protections:** Blind timing-safe responses prevent user discovery on failed logins and reset requests.
+- **Sliding-Window Rate Limiter:** Protects against credential stuffing and brute-force abuse.
+- **Tokenized Password Resets & Email Verification:** Time-limited, single-use cryptographically hashed tokens.
+
+---
+
+## 🏗️ System Architecture & Workflow
+
+```text
+  [ User Prompt / Voice / Image ]
+                 │
+                 ▼
+      ┌─────────────────────┐
+      │   Dashboard Studio   │ ── (Auto-expanding Prompt Composer & HUD)
+      └──────────┬──────────┘
+                 │ (Prompt Payload + Context)
+                 ▼
+      ┌─────────────────────┐
+      │  Builder Generator  │ ── (Multi-stage AI Generation Pipeline)
+      └──────────┬──────────┘
+                 ├────────────────────────┬────────────────────────┐
+                 ▼                        ▼                        ▼
+       [Responsive Canvas]       [Source Code Viewer]      [ZIP / HTML Export]
+     Desktop / Tablet / Mobile        HTML5 + CSS3           Production Bundle
+```
 
 ---
 
@@ -54,72 +95,30 @@ The **FORMA Authentication Module** provides a secure, ergonomic foundation for 
 
 > **Tagline:** *"Give thought its form."*
 
-- **Obsidian Black (`#09090b` / `#0e0e12` / `#131318`):** Deep, tactile, focused surfaces engineered for low eye fatigue.
-- **Warm White (`#fbf9f5` / `#dcd7ce`):** High-legibility typography evoking editorial printing.
-- **Subtle Orange Accents (`#ff6326` / `#ff7536`):** Focused kinetic energy on interactive triggers.
-- **Refined Typography:** Expressive geometric headings (`Space Grotesk`) paired with proportional sans body (`Plus Jakarta Sans`).
-- **Clean Interfaces:** Balanced spacing, soft translucent borders (`rgba(244, 240, 232, 0.08)`), and split-screen layouts.
+- **Deep Space Void (`#080B14`, `#0C101D`, `#111A30`):** Ultra-dark, tactile surfaces with zero eye fatigue and rich ambient depth.
+- **Electric Indigo & Cyber Magenta (`#3867FF`, `#F052C7`):** Vivid kinetic energy applied to focus rings, primary action buttons, and holographic aurora glows.
+- **Frosted Glass Panels:** Floating cards styled with `bg-[#0c101d]/85`, `backdrop-blur-3xl`, and delicate sub-pixel borders (`border-[#252B3A]/60`).
+- **Warm Platinum Typography (`#F5F5F7`, `#94A3B8`):** High-contrast editorial typography paired with `Space Grotesk` headings and `Plus Jakarta Sans` body copy.
 
 ---
 
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Framework:** React 19 (React.js) + JavaScript + Vite 8
-- **Styling:** Tailwind CSS v4 + Vanilla Design System
+- **Framework:** React 19 (React.js) + JavaScript (ES2022)
+- **Build Tool:** Vite 6
+- **Styling:** Tailwind CSS v4 + Vanilla CSS Design Tokens
 - **Icons:** Lucide React
 - **Routing:** React Router v7
 - **Forms & Validation:** React Hook Form + Zod
-- **Testing:** Vitest + Testing Library + jsdom
+- **Testing:** Vitest + Testing Library + jsdom (57 comprehensive tests)
 
 ### Backend
 - **Framework:** FastAPI (Python 3.12)
-- **Settings & Validation:** Pydantic v2 + Pydantic Settings
 - **Database:** MongoDB Atlas via `motor` (Async PyMongo) with resilient memory-backed fallback
-- **Cryptography:** `argon2-cffi` (Argon2id)
-- **Testing:** `pytest` + `pytest-asyncio` + `httpx`
-
----
-
-## 🔒 Security & Authentication Design
-
-### 1. MongoDB Collections & Indexes
-
-```text
-users collection:
-├── _id: ObjectId / string
-├── name: string
-├── email: string (lowercase, indexed unique)
-├── password_hash: string (Argon2id)
-├── email_verified: boolean
-├── is_active: boolean
-├── created_at: datetime (UTC)
-└── updated_at: datetime (UTC)
-
-sessions collection:
-├── _id: ObjectId / string
-├── session_id_hash: string (SHA-256 hash, indexed unique)
-├── user_id: string (indexed)
-├── created_at: datetime
-├── expires_at: datetime (indexed TTL)
-├── is_revoked: boolean
-├── user_agent: string
-└── ip_address: string
-
-password_resets collection:
-├── _id: ObjectId / string
-├── token_hash: string (SHA-256 hash, indexed unique)
-├── user_id: string
-├── email: string
-├── created_at: datetime
-├── expires_at: datetime (indexed TTL)
-└── is_used: boolean
-```
-
-### 2. Password Policy
-- Minimum 8 characters, maximum 128 characters.
-- Requires at least 1 lowercase letter, 1 uppercase letter, 1 number, and 1 special symbol.
-- Client-side visual strength indicator + independent server-side validation.
+- **Validation & Settings:** Pydantic v2 + Pydantic Settings
+- **Cryptography:** `argon2-cffi` (Argon2id) + SHA-256
+- **Testing:** `pytest` + `pytest-asyncio` + `httpx` (12 comprehensive tests)
 
 ---
 
@@ -129,74 +128,128 @@ password_resets collection:
 An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                     # GitHub Actions CI (frontend & backend lint/test/build)
+│       └── ci.yml                     # GitHub Actions CI (immutable pinned commit SHAs)
 ├── backend/
 │   ├── app/
 │   │   ├── api/
 │   │   │   ├── auth.py                # Authentication endpoints & cookie controllers
-│   │   │   └── deps.py                # Route dependencies & security guards (Separation of Concerns)
+│   │   │   └── deps.py                # Security dependencies & session guards
 │   │   ├── core/
-│   │   │   ├── config.py              # Pydantic Settings
-│   │   │   ├── security.py            # Argon2id hasher & token utilities
-│   │   │   └── rate_limiter.py        # Sliding-window rate limiter
+│   │   │   ├── config.py              # Pydantic Settings & environment parsing
+│   │   │   ├── rate_limiter.py        # Sliding-window rate limiter
+│   │   │   └── security.py            # Argon2id hasher & cryptographic token generators
 │   │   ├── db/
-│   │   │   └── mongodb.py             # Motor async MongoDB client & fallback
+│   │   │   └── mongodb.py             # Motor async MongoDB client & in-memory fallback
 │   │   ├── schemas/
-│   │   │   └── auth.py                # Pydantic request & response DTO schemas
+│   │   │   └── auth.py                # Request and response DTO validation schemas
 │   │   ├── services/
-│   │   │   ├── auth_service.py        # Dedicated authentication service layer
-│   │   │   └── email_service.py       # Email delivery (SMTP & dev outbox)
+│   │   │   ├── auth_service.py        # User authentication & session service layer
+│   │   │   └── email_service.py       # Email delivery (SMTP, console, and mock outbox)
 │   │   ├── __init__.py
-│   │   └── main.py                    # FastAPI application & lifespan
+│   │   └── main.py                    # FastAPI application initialization & lifespan
 │   ├── tests/
-│   │   └── test_auth.py               # Comprehensive pytest test suite (12 tests)
-│   ├── .env.example                   # Backend environment template
+│   │   └── test_auth.py               # Backend pytest test suite (12 tests)
+│   ├── .env.example
 │   ├── .gitignore
-│   └── requirements.txt               # Python dependencies
+│   └── requirements.txt               # Backend Python dependencies
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── auth/
-│   │   │   │   ├── AuthLayout.jsx     # Split-screen desktop auth layout
+│   │   │   │   ├── AuthLayout.jsx     # Split-screen responsive authentication container
 │   │   │   │   ├── PasswordStrengthMeter.jsx
-│   │   │   │   ├── ProtectedRoute.jsx # Route guard for private views
-│   │   │   │   └── PublicOnlyRoute.jsx # Route guard with open-redirect defense
-│   │   │   └── ui/
-│   │   │       ├── Button.jsx
-│   │   │       ├── FormaLogo.jsx      # Custom typographic wordmark + geometric symbol
-│   │   │       └── Input.jsx
+│   │   │   │   ├── ProtectedRoute.jsx # Authentication route guard
+│   │   │   │   └── PublicOnlyRoute.jsx# Open-redirect protected public guard
+│   │   │   ├── builder/
+│   │   │   │   ├── CodeViewerModal.jsx# Raw HTML/CSS syntax-highlighted code inspector
+│   │   │   │   ├── ExportModal.jsx    # Standalone HTML and ZIP export modal
+│   │   │   │   ├── GenerationProgress.jsx # AI multi-stage synthesis HUD
+│   │   │   │   ├── PreviewCanvas.jsx  # Multi-device responsive sandboxed preview iframe
+│   │   │   │   └── PromptBar.jsx      # In-studio real-time iteration prompt composer
+│   │   │   ├── landing/               # Marketing & feature showcase components
+│   │   │   │   ├── HeroSection.jsx
+│   │   │   │   ├── HowItWorksSection.jsx
+│   │   │   │   ├── InteractiveDemoSection.jsx
+│   │   │   │   ├── TestimonialsSection.jsx
+│   │   │   │   ├── PricingSection.jsx
+│   │   │   │   └── LandingNavbar.jsx
+│   │   │   ├── motion/                # Kinetic UI primitives (Shimmer, Spotlight, Marquee)
+│   │   │   └── ui/                    # Core UI primitives (Button, Input, FormaLogo)
 │   │   ├── context/
-│   │   │   ├── AuthContext.jsx        # Authentication state provider
-│   │   │   └── useAuth.js             # useAuth hook
+│   │   │   ├── AuthContext.jsx        # Auth state provider
+│   │   │   └── useAuth.js             # useAuth custom hook
 │   │   ├── lib/
-│   │   │   ├── api.js                 # Centralized fetch client with CSRF & cookies
-│   │   │   └── utils.js
+│   │   │   ├── api.js                 # Centralized fetch client with automatic CSRF & cookies
+│   │   │   └── utils.js               # Class merge & string formatting utilities
 │   │   ├── pages/
-│   │   │   ├── DashboardPlaceholderPage.jsx # Protected placeholder view
-│   │   │   ├── ForgotPasswordPage.jsx # Request password reset link
-│   │   │   ├── LoginPage.jsx          # Sign in view
-│   │   │   ├── RegisterPage.jsx       # Account creation view
-│   │   │   ├── ResetPasswordPage.jsx  # Token password reset
-│   │   │   └── VerifyEmailPage.jsx    # Email verification & resend
+│   │   │   ├── BuilderPage.jsx        # Live AI Website Synthesis Studio & Canvas
+│   │   │   ├── DashboardPage.jsx      # Studio Dashboard with auto-growing prompt bar
+│   │   │   ├── LandingPage.jsx        # Production marketing landing page
+│   │   │   ├── LoginPage.jsx
+│   │   │   ├── RegisterPage.jsx
+│   │   │   ├── ForgotPasswordPage.jsx
+│   │   │   ├── ResetPasswordPage.jsx
+│   │   │   └── VerifyEmailPage.jsx
 │   │   ├── routes/
-│   │   │   └── AppRoutes.jsx          # Dedicated router definitions & guard mappings
+│   │   │   └── AppRoutes.jsx          # Route definitions, guards, and navigation mappings
 │   │   ├── schemas/
-│   │   │   └── auth.schema.js         # Zod validation schemas & password evaluator
+│   │   │   └── auth.schema.js         # Zod schemas for forms and credentials
 │   │   ├── services/
-│   │   │   └── auth.service.js        # Dedicated auth API service layer (Separation of Concerns)
-│   │   ├── tests/
-│   │   │   └── auth.test.jsx          # Vitest frontend tests (14 tests)
-│   │   ├── App.jsx                    # Root provider composition
-│   │   ├── index.css                  # Obsidian black & warm white design tokens
-│   │   └── main.jsx                   # React DOM entry
-│   ├── eslint.config.js               # ESLint configuration
-│   ├── index.html
-│   ├── jsconfig.json                  # JavaScript path aliases & IDE config
+│   │   │   └── auth.service.js        # Authentication API service client
+│   │   ├── tests/                     # Vitest test suite (57 tests)
+│   │   │   ├── auth.test.jsx          # Auth workflows & security tests
+│   │   │   ├── builder.test.jsx       # Studio generator & canvas tests
+│   │   │   ├── codeViewer.test.jsx    # Code inspector & copy tests
+│   │   │   ├── dashboard.test.jsx     # Dashboard prompt composer & mockup tests
+│   │   │   ├── exportModal.test.jsx   # ZIP & HTML export tests
+│   │   │   ├── generationProgress.test.jsx # Synthesis progress pipeline tests
+│   │   │   ├── previewCanvas.test.jsx # Multi-device responsive viewport tests
+│   │   │   └── promptBar.test.jsx     # Studio prompt bar tests
+│   │   ├── App.jsx
+│   │   ├── index.css                  # Dark mode design tokens & animations
+│   │   └── main.jsx
 │   ├── package.json
-│   └── vite.config.js                 # Vite + Tailwind + Proxy configuration
+│   └── vite.config.js
 ├── .env.example
 ├── .gitignore
 └── README.md
+```
+
+---
+
+## 🔒 Security & Authentication Engine
+
+### MongoDB Collections & Index Schema
+
+```text
+users collection:
+├── _id: ObjectId / string
+├── name: string
+├── email: string (lowercase, unique index)
+├── password_hash: string (Argon2id)
+├── email_verified: boolean
+├── is_active: boolean
+├── created_at: datetime (UTC)
+└── updated_at: datetime (UTC)
+
+sessions collection:
+├── _id: ObjectId / string
+├── session_id_hash: string (SHA-256 hash, unique index)
+├── user_id: string (indexed)
+├── created_at: datetime
+├── expires_at: datetime (indexed TTL auto-purge)
+├── is_revoked: boolean
+├── user_agent: string
+└── ip_address: string
+
+password_resets collection:
+├── _id: ObjectId / string
+├── token_hash: string (SHA-256 hash, unique index)
+├── user_id: string
+├── email: string
+├── created_at: datetime
+├── expires_at: datetime (indexed TTL auto-purge)
+└── is_used: boolean
 ```
 
 ---
@@ -207,7 +260,7 @@ An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/
 
 - **Python** 3.12+
 - **Node.js** 20+ or 22+ & **npm**
-- *(Optional)* Running instance of **MongoDB** or **MongoDB Atlas** connection string (an in-memory store acts as automatic fallback for testing and offline runs).
+- *(Optional)* Local **MongoDB** instance or **MongoDB Atlas** cluster URI (in-memory async fallback activates automatically if unavailable).
 
 ---
 
@@ -221,20 +274,21 @@ An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/
 2. **Configure environment variables:**
    ```bash
    copy .env.example .env
+   # On macOS/Linux: cp .env.example .env
    ```
-   *(Optional)* Fill in your `MONGODB_URI` from MongoDB Atlas. If omitted, the backend runs gracefully using the built-in async fallback.
 
-3. **Install dependencies:**
+3. **Install Python dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Start the FastAPI server:**
+4. **Start the FastAPI backend server:**
    ```bash
    uvicorn app.main:app --reload --port 8000
    ```
-   - API: [http://127.0.0.1:8000](http://127.0.0.1:8000)
-   - Interactive Swagger Docs: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+   - **API Base:** [http://127.0.0.1:8000](http://127.0.0.1:8000)
+   - **Interactive Swagger Docs:** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+   - **Redoc Documentation:** [http://127.0.0.1:8000/redoc](http://127.0.0.1:8000/redoc)
 
 ---
 
@@ -245,7 +299,7 @@ An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/
    cd frontend
    ```
 
-2. **Install dependencies:**
+2. **Install frontend dependencies:**
    ```bash
    npm install --legacy-peer-deps
    ```
@@ -258,42 +312,40 @@ An-AI-Agent-That-Builds-Websites-from-Natural-Language-Prompts/
 
 ---
 
-## 🌐 API Endpoints
+## 🌐 API Reference
 
 | Method | Endpoint | Description | Auth Required |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/auth/register` | Register new account & create session | No |
-| `POST` | `/api/auth/login` | Authenticate credentials & set HttpOnly cookie | No |
-| `POST` | `/api/auth/logout` | Revoke session & clear cookies | Optional |
-| `GET` | `/api/auth/me` | Fetch authenticated user profile | **Yes** |
-| `POST` | `/api/auth/forgot-password` | Request password reset token | No |
-| `POST` | `/api/auth/reset-password` | Update password with single-use token | No |
-| `POST` | `/api/auth/verify-email` | Confirm email address via token | No |
-| `POST` | `/api/auth/resend-verification` | Request a fresh verification link | No |
+| :--- | :--- | :--- | :---: |
+| `POST` | `/api/auth/register` | Create account & issue session cookie | No |
+| `POST` | `/api/auth/login` | Authenticate credentials & issue HttpOnly cookie | No |
+| `POST` | `/api/auth/logout` | Invalidate active session & clear cookies | Optional |
+| `GET` | `/api/auth/me` | Return authenticated user profile | **Yes** |
+| `POST` | `/api/auth/forgot-password` | Issue single-use password reset token | No |
+| `POST` | `/api/auth/reset-password` | Set new password using verified token | No |
+| `POST` | `/api/auth/verify-email` | Validate email address confirmation token | No |
+| `POST` | `/api/auth/resend-verification` | Issue a fresh email verification link | No |
 
 ---
 
 ## 🧪 Testing & Quality Assurance
 
-### Run Backend Tests (Pytest)
-From `backend/`:
+### Run Frontend Test Suite (Vitest)
+Executes **57 unit and integration tests** across 7 test suites validating the prompt composer, multi-device viewport canvas, code inspector, ZIP exporter, authentication guards, and CSRF token handling:
 ```bash
-python -m pytest -v
+npm --prefix frontend test
 ```
-*Validates registration, duplicate accounts, input bounds, login verification, session cookies, unauthenticated rejections, logout session invalidation, forgot-password anti-enumeration, reset token single-use, and rate limiting.*
-
-### Run Frontend Tests (Vitest)
-From `frontend/`:
-```bash
-npm test
-```
-*Validates Zod validation schemas, password mismatch rules, terms acceptance, password strength meter scores, FormaLogo typography, and open-redirect attack defenses.*
 
 ### Run Frontend Linter & Build
-From `frontend/`:
 ```bash
-npm run lint
-npm run build
+npm --prefix frontend run lint
+npm --prefix frontend run build
+```
+
+### Run Backend Test Suite (Pytest)
+Executes **12 asynchronous pytest tests** validating registration, Argon2id hashing, session lifecycle, CSRF protection, and anti-enumeration:
+```bash
+cd backend
+python -m pytest -v
 ```
 
 ---
@@ -302,48 +354,59 @@ npm run build
 
 | Variable | Description | Default |
 | :--- | :--- | :--- |
-| `ENV` | Environment (`development`, `production`, `test`) | `development` |
-| `MONGODB_URI` | MongoDB Atlas or local connection URI | `mongodb://localhost:27017` |
+| `ENV` | Application environment (`development`, `production`, `test`) | `development` |
+| `MONGODB_URI` | MongoDB Atlas URI or local connection string | `mongodb://localhost:27017` |
 | `MONGODB_DATABASE` | Database name | `forma_auth` |
-| `FRONTEND_ORIGIN` | Permitted frontend CORS origin | `http://localhost:5173` |
-| `BACKEND_URL` | Backend URL | `http://localhost:8000` |
+| `FRONTEND_ORIGIN` | Allowed CORS frontend origin | `http://localhost:5173` |
+| `BACKEND_URL` | Backend server URL | `http://localhost:8000` |
 | `SESSION_SECRET` | 32+ character key for session cryptographic signatures | Set in `.env` |
-| `SESSION_MAX_AGE_SECONDS` | Standard session duration | `604800` (7 days) |
-| `SESSION_REMEMBER_ME_DAYS` | Remember-me session duration | `30` (30 days) |
-| `COOKIE_SECURE` | Enable HTTPS-only cookie flag | `false` (auto-true in prod) |
+| `SESSION_MAX_AGE_SECONDS` | Standard session lifetime | `604800` (7 days) |
+| `SESSION_REMEMBER_ME_DAYS` | Remember-me extended session duration | `30` (30 days) |
+| `COOKIE_SECURE` | Enforces HTTPS-only cookies | `false` (auto `true` in prod) |
 | `EMAIL_PROVIDER` | Email delivery service (`console`, `smtp`, `mock`) | `console` |
-| `SMTP_HOST`, `SMTP_PORT` | SMTP server credentials for live email | Optional |
+| `SMTP_HOST`, `SMTP_PORT` | SMTP credentials for production email delivery | Optional |
 
 ---
 
 ## 🔍 Troubleshooting
 
-- **Email Delivery in Local Dev:** By default, `EMAIL_PROVIDER=console`. When requesting password resets in development, reset links are displayed directly in the FastAPI terminal console and recorded in `email_service.dev_outbox`.
-- **CORS & Cookies:** The Vite dev server proxies `/api` requests to `http://127.0.0.1:8000`, ensuring cookies work seamlessly without cross-origin domain barriers.
-- **Rate Limit Triggered:** If you submit too many failed login attempts within 60 seconds, the API returns `429 Too Many Requests`. Wait 60 seconds or restart the backend to clear the in-memory window.
+- **Email Links in Development:** When `EMAIL_PROVIDER=console`, password reset links and verification tokens are logged directly to the FastAPI terminal console.
+- **Cross-Origin Cookies:** The Vite development server automatically proxies `/api` requests to `http://127.0.0.1:8000`, eliminating third-party cookie restrictions during local development.
+- **Rate Limit Triggered:** If too many failed authentication attempts occur within 60 seconds, the API responds with `429 Too Many Requests`. Wait 60 seconds or restart the backend to reset the window.
+- **GitHub Actions Language Server Warnings:** All GitHub Action references in `.github/workflows/ci.yml` are pinned to immutable commit hashes (`actions/checkout@11bd71...`, `actions/setup-node@1d0ff4...`, `actions/setup-python@423755...`) to prevent rate-limit lookups and tag resolution errors.
 
 ---
 
-## 🗺️ Scope & Future Roadmap
+## 🗺️ Roadmap & Milestone Status
 
-**Implemented in this Milestone:**
-- [x] Complete, production-minded Authentication Module
-- [x] Desktop split-screen layout & responsive mobile/tablet forms
-- [x] Argon2id password security & complexity verification
-- [x] Server-side session tokens with HttpOnly SameSite cookies
-- [x] Double-submit CSRF defense
-- [x] Forgot password & single-use password reset workflow
-- [x] Email verification endpoints & resend capability
-- [x] Protected dashboard placeholder (`/dashboard`)
-- [x] Comprehensive automated test suites (Backend Pytest + Frontend Vitest)
+- [x] **Milestone 1: Production Authentication Core**
+  - [x] Argon2id password security & complexity verification
+  - [x] Server-managed sessions via HttpOnly SameSite cookies & double-submit CSRF defense
+  - [x] Password reset & email verification flows with single-use tokens
+  - [x] 12/12 Pytest tests passing
 
-**Intentionally Deferred to Future Milestones:**
-- [ ] AI prompt-to-website generation engine
-- [ ] Visual canvas & block website editor
-- [ ] Multi-page site manager & export to deployment
+- [x] **Milestone 2: Modern Marketing Experience**
+  - [x] High-conversion dark landing page (`/`) with interactive showcases
+  - [x] Motion components (Marquee, Spotlight, Shimmer, Light Pillar)
+
+- [x] **Milestone 3: Studio Dashboard & Generation UI**
+  - [x] Downward auto-expanding prompt composer without scrollbars
+  - [x] Rotating typography and circular asset attachment trigger `(+)`
+  - [x] Holographic synthesis HUD and seamless ambient gradient mesh
+
+- [x] **Milestone 4: Interactive AI Website Builder**
+  - [x] Natural language prompt synthesis studio (`/builder`)
+  - [x] Multi-device responsive sandbox canvas (Desktop 1440px / Tablet 768px / Mobile 375px)
+  - [x] Live syntax-highlighted HTML & CSS code viewer modal
+  - [x] Standalone HTML & ZIP export engine
+  - [x] 57/57 Vitest tests passing
+
+- [ ] **Milestone 5: Advanced Generation & Cloud Deployment**
+  - [ ] Multi-page site generation and visual section drag-and-drop
+  - [ ] One-click Netlify / Vercel cloud deployment webhook integration
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE).
